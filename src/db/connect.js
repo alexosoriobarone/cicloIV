@@ -10,4 +10,5 @@ const Products = mongoose.model('products', {
     qty: { type: Number },
     createdAt: { type: Date }
 });
+
 module.exports = Products;
