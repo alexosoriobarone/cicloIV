@@ -11,6 +11,24 @@ router.get('/api/v1/products', function(req, res) {
     });
 
 
+
+
+});
+
+router.get('/api/v1/products/:id', function(req, res) {
+    const { id } = req.params;
+    Products.find({ _id: id }, function(err, result) {
+        if (!err) {
+
+            res.json(result);
+        } else {
+            res.json({ error: err });
+        }
+    });
+
+
+
+
 });
 router.post('/api/v1/products/add', function(req, res) {
     const prods = new Products(req.body);
