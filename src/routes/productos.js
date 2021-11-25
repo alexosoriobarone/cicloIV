@@ -4,6 +4,7 @@ const Products = require('../db/connect');
 router.get('/api/v1/products', function(req, res) {
     Products.find(function(err, result) {
         if (!err) {
+            console.log('api invocada');
             res.json(result);
         } else {
             res.json({ error: err });
