@@ -2,10 +2,11 @@ const express = require('express');
 const router = express.Router();
 const Products = require('../db/connect');
 router.get('/api/v1/products', function(req, res) {
-    Products.find(function(err, result) {
+    Products.find({}, null, { sort: { description: 1 } }, function(err, result) {
         if (!err) {
-            console.log('api invocada');
+
             res.json(result);
+
         } else {
             res.json({ error: err });
         }
@@ -31,14 +32,17 @@ router.get('/api/v1/products/:id', function(req, res) {
 
 
 router.post('/api/v1/products/add', function(req, res) {
+
     const prods = new Products(req.body);
-    prods.save(function(err, pro) {
+
+    prods.save((err, pro) => {
         if (!err) {
             res.json({ status: 'Producto creado con exito' });
         } else {
             res.json({ status: err });
         }
     });
+
 
 
 });
