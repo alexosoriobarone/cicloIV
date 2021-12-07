@@ -2,10 +2,14 @@ const express = require('express');
 const router = express.Router();
 const Products = require('../db/connect');
 router.get('/api/v1/products', function(req, res) {
-    Products.find({}, null, { sort: { description: 1 }, limit: 10 }, function(err, result) {
+    Products.find({}, null, { sort: { description: 1 } }, function(err, result) {
         if (!err) {
-
-            res.json(result);
+            let prods = JSON.parse(JSON.stringify(result));
+            prods.total = prods.length;
+            let valor = JSON.stringify(prods);
+            console.log(prods);
+            res.send(prods);
+            //res.json(prods);
 
         } else {
             res.json({ error: err });
