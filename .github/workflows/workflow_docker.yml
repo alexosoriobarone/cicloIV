@@ -12,15 +12,15 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - uses: isbang/compose-action@v1.4.1
     - name: Docker login
       env:
         DOCKER_USER: ${{secrets.DOCKER_USER}}
         DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
       run: |
         docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
-      with:
-        compose-file: "./docker-compose.yml"
+    - name: Docker compose run
+      run: 
+        docker-compose -f "docker-compose.yml" up -d --build
     - name: push docker
       run: |
         docker push $DOCKER_USER/cicloIV:1.0
