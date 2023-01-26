@@ -21,6 +21,8 @@ jobs:
     - name: Docker compose run
       run: 
         docker-compose -f "docker-compose.yml" up -d --build
+    - name: Docker tag
+      run: docker tag cicloiv $DOCKER_USER/cicloiv:1.0
     - name: push docker
       run: |
         docker push $DOCKER_USER/cicloiv:1.0
