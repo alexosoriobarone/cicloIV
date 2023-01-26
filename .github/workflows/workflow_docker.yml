@@ -22,7 +22,7 @@ jobs:
       run: 
         docker-compose -f "docker-compose.yml" up -d --build
     - name: Docker tag
-      run: docker tag cicloiv $DOCKER_USER/cicloiv:1.0
+      run: docker tag cicloiv ${{secrets.DOCKER_USER}}/cicloiv:1.0
     - name: push docker
       run: |
-        docker push $DOCKER_USER/cicloiv:1.0
+        docker push ${{secrets.DOCKER_USER}}/cicloiv:1.0
